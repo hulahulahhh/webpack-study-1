@@ -6,12 +6,13 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
-  mode: "production",
+  mode: "none",
   entry: "./src/index.js",
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist")
   },
+  devtool: "inline-source-map",
   devServer: {
     contentBase: "/dist" // 将dist目录下的文件作为可访问文件, 但若dist目录没有内容呢，wds打包后的文件不是放在内存中的吗，那为什么要设置contentBase呢？
   },
@@ -29,11 +30,11 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              plugins: () => {
+              plugins: [
                 require("autoprefixer")({
                   overrideBrowserslist: ["last 2 version", ">1%", "ios 7"]
-                });
-              }
+                })
+              ]
             }
           }
         ]

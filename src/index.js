@@ -7,6 +7,8 @@ function component() {
     element.innerHTML = 'hello webpack world new';
     element.classList.add('hello');
 
+    throw new Error('source map 你能找到我吗')
+
     return element;
   }
 
